@@ -39,6 +39,8 @@ PAD performs a known step, captures a screenshot, and asks the Python helper to 
 
 PAD only continues when the checkpoint response is valid and confidence meets the configured threshold.
 
+The GnuCash screen sequence is now documented from actual screenshots in [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md). The observed creation path is `Business > Vendor > New Vendor...`, and final verification uses `Business > Vendor > Vendors Overview`.
+
 ## Error Flow
 
 Typical stop conditions include:

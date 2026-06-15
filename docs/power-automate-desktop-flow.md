@@ -1,6 +1,8 @@
 # Power Automate Desktop Flow
 
-This document describes the planned PAD flow. It is not built in the foundation phase.
+This document describes the planned PAD flow. It is not built in this phase.
+
+The current design is based on actual GnuCash screenshots captured from the local demo file. See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md).
 
 ## PAD Responsibility
 
@@ -17,18 +19,46 @@ Generate RunId
 Open GnuCash
 Take screenshot
 Run Vision checkpoint: GN_CASH_MAIN_SCREEN
-Navigate to New Vendor
+Open Business menu
 Take screenshot
-Run Vision checkpoint: NEW_VENDOR_SCREEN
+Run Vision checkpoint: BUSINESS_MENU_OPEN
+Open Vendor submenu
+Take screenshot
+Run Vision checkpoint: VENDOR_NEW_MENU_PATH
+Click New Vendor...
+Take screenshot
+Run Vision checkpoint: NEW_VENDOR_FORM_BLANK
 Enter supplier fields
 Take screenshot
-Run Vision checkpoint: FIELD_VALUE_CHECK
-Save vendor
+Run Vision checkpoint: NEW_VENDOR_FORM_COMPLETED
+Click OK
 Take screenshot
-Run Vision checkpoint: SAVE_CONFIRMATION
+Run Vision checkpoint: POST_SAVE_RETURN_SCREEN
+Navigate to Business > Vendor > Vendors Overview
+Take screenshot
+Run Vision checkpoint: VENDOR_OVERVIEW_MENU_PATH
+Open Vendors Overview
+Take screenshot
+Run Vision checkpoint: CREATED_VENDOR_VISIBLE
 Update SharePoint status
 Close GnuCash
 ```
+
+## Observed GnuCash Field Mapping
+
+| Supplier request field | GnuCash field |
+|---|---|
+| SupplierLegalName | Company Name |
+| ContactName | Payment Address > Name |
+| Address | Payment Address > Address line 1 |
+| City | Payment Address > Address line 2 |
+| Country | Payment Address > Address line 3 |
+| Postcode | Payment Address > Address line 4 |
+| SupplierEmail | Email |
+
+The observed screenshots leave `Vendor Number` blank and GnuCash then displays vendor number `000001` in the Vendors tab.
+
+`Currency` is not visible in the captured New Vendor `Vendor` tab and should not be forced into the UI path without a confirmed visible target field.
 
 ## PAD To Python Handoff
 
@@ -38,9 +68,9 @@ PAD should pass structured input to Python. A JSON file is recommended:
 {
   "run_id": "2026-06-15-143000-ABC123",
   "supplier_request_id": "42",
-  "checkpoint_type": "NEW_VENDOR_SCREEN",
-  "screenshot_path": "screenshots/archive/2026-06-15-143000-ABC123/step-002.png",
-  "expected_screen": "GnuCash New Vendor screen",
+  "checkpoint_type": "NEW_VENDOR_FORM_BLANK",
+  "screenshot_path": "screenshots/archive/2026-06-15-143000-ABC123/step-004-new-vendor-blank.png",
+  "expected_screen": "GnuCash New Vendor dialog with the Vendor tab selected",
   "expected_field": null,
   "expected_value": null,
   "supplier_context": {
@@ -55,9 +85,9 @@ Python should return JSON that PAD can read:
 
 ```json
 {
-  "checkpoint_type": "NEW_VENDOR_SCREEN",
+  "checkpoint_type": "NEW_VENDOR_FORM_BLANK",
   "status": "continue",
-  "screen_state": "new_vendor_screen_visible",
+  "screen_state": "new_vendor_blank_form_visible",
   "confidence": 0.96,
   "audit_comment": "Mock mode: assuming the New Vendor screen is visible.",
   "visible_errors": [],

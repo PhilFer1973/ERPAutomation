@@ -15,11 +15,38 @@ PAD continues only if status and confidence allow it
 Example checkpoint types:
 
 - `GN_CASH_MAIN_SCREEN`
-- `NEW_VENDOR_SCREEN`
+- `BUSINESS_MENU_OPEN`
+- `VENDOR_NEW_MENU_PATH`
+- `NEW_VENDOR_FORM_BLANK`
+- `NEW_VENDOR_FORM_COMPLETED`
 - `FIELD_VALUE_CHECK`
 - `SAVE_CONFIRMATION`
+- `POST_SAVE_RETURN_SCREEN`
+- `VENDOR_OVERVIEW_MENU_PATH`
 - `FINAL_RECORD_CHECK`
+- `CREATED_VENDOR_VISIBLE`
 - `ERROR_SCREEN_CHECK`
+
+## Screenshot-Based V1 Checkpoint Sequence
+
+The current V1 sequence is based on actual GnuCash screenshots captured from:
+
+```text
+C:\Users\Philip\Downloads\ERPAutomation\screenshots\input
+```
+
+| Step | Screenshot | Checkpoint type | Purpose |
+|---:|---|---|---|
+| 1 | `01-gnucash-main-screen.PNG` | `GN_CASH_MAIN_SCREEN` | Confirm GnuCash is open on the Accounts screen |
+| 2 | `02-business-menu-open.PNG` | `BUSINESS_MENU_OPEN` | Confirm the Business menu is open |
+| 3 | `03-vendor-menu-path.PNG` | `VENDOR_NEW_MENU_PATH` | Confirm `Business > Vendor > New Vendor...` is visible |
+| 4 | `04-new-vendor-blank-form.PNG` | `NEW_VENDOR_FORM_BLANK` | Confirm the blank New Vendor form is ready |
+| 5 | `05-new-vendor-completed-before-save.PNG` | `NEW_VENDOR_FORM_COMPLETED` | Confirm values are visible before save |
+| 6 | `06-after-save-confirmation-or-return-screen.PNG` | `POST_SAVE_RETURN_SCREEN` | Confirm GnuCash returned to the accounts screen after OK |
+| 7 | `07-created-vendor-path.PNG` | `VENDOR_OVERVIEW_MENU_PATH` | Confirm `Business > Vendor > Vendors Overview` is visible |
+| 8 | `08-created-vendor-visible.PNG` | `CREATED_VENDOR_VISIBLE` | Confirm the created vendor row is visible |
+
+See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md) for the detailed evidence and field mapping.
 
 ## Strict JSON Output
 
@@ -27,9 +54,9 @@ Vision responses must contain:
 
 ```json
 {
-  "checkpoint_type": "NEW_VENDOR_SCREEN",
+  "checkpoint_type": "NEW_VENDOR_FORM_BLANK",
   "status": "continue",
-  "screen_state": "new_vendor_screen_visible",
+  "screen_state": "new_vendor_blank_form_visible",
   "confidence": 0.96,
   "audit_comment": "The expected screen appears to be visible.",
   "visible_errors": [],

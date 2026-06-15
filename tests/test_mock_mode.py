@@ -28,3 +28,19 @@ def test_mock_response_matches_schema():
 
     assert validated["status"] == "continue"
     assert validated["visible_errors"] == []
+
+
+def test_actual_gnucash_final_checkpoint_is_supported():
+    request = VisionAnalysisRequest(
+        run_id="RUN-004",
+        supplier_request_id="42",
+        checkpoint_type="CREATED_VENDOR_VISIBLE",
+        screenshot_path=Path("screenshots/input/08-created-vendor-visible.png"),
+        expected_screen="GnuCash Vendors tab showing the created supplier",
+    )
+
+    response = build_mock_response(request)
+    validated = validate_vision_response(response, expected_checkpoint="CREATED_VENDOR_VISIBLE")
+
+    assert validated["status"] == "complete_success"
+    assert validated["screen_state"] == "created_vendor_visible_in_vendor_list"

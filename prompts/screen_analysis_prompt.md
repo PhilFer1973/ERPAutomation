@@ -2,6 +2,8 @@
 
 Validate the screenshot for the requested checkpoint.
 
+For GnuCash V1 checkpoints, compare the screenshot against the observed menu path and form evidence documented in `docs/gnucash-screenshot-checkpoints.md`.
+
 Return strict JSON with:
 
 - checkpoint_type

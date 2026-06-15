@@ -33,6 +33,8 @@ The V1 design uses Microsoft Forms to collect supplier details, SharePoint Lists
 
 The repository contains documentation, schemas, sample data, a runnable Python mock mode, and a real OpenAI Vision client path for later screenshot validation. It does not yet automate GnuCash, Power Automate Desktop, SharePoint, or Microsoft Forms.
 
+Actual GnuCash screenshots have now been captured from the local demo file and are reflected in the checkpoint design. See [docs/gnucash-screenshot-checkpoints.md](docs/gnucash-screenshot-checkpoints.md).
+
 ## Architecture Summary
 
 ```text
@@ -132,7 +134,7 @@ Example helper call once dependencies are installed:
 python src\vision_agent\main.py --input-json sample-data\pad-checkpoint-sample.json --output-json logs\sample-output.json
 ```
 
-The sample PAD checkpoint file uses fictional data and is included only to make mock-mode smoke testing easy.
+The sample PAD checkpoint file uses fictional data and is included only to make mock-mode smoke testing easy. If your local `.env` has `MOCK_MODE=false`, switch it back to `true` for this sample or provide a real screenshot path.
 
 ## Real OpenAI Vision Mode
 

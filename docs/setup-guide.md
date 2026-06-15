@@ -10,8 +10,8 @@ You will need guidance for:
 
 - Installing Python
 - Creating a Python virtual environment
-- Installing GnuCash
-- Creating a local demo GnuCash file
+- Installing GnuCash: completed
+- Creating a local demo GnuCash file: completed
 - Installing or enabling Power Automate Desktop
 - Creating a Microsoft Form
 - Creating SharePoint Lists
@@ -20,6 +20,18 @@ You will need guidance for:
 - Creating an OpenAI API key
 - Creating a local `.env` file
 - Choosing local screenshot and log paths
+
+Current GnuCash demo file:
+
+```text
+C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+```
+
+Current GnuCash screenshot input folder:
+
+```text
+C:\Users\Philip\Downloads\ERPAutomation\screenshots\input
+```
 
 ## Foundation-Only Local Test
 

@@ -1,44 +1,58 @@
 # GnuCash Setup
 
-GnuCash setup is a later phase. This foundation does not require GnuCash to be installed.
-
 ## Intended V1 Use
 
 GnuCash will be treated as a UI-only legacy finance system. The automation must not use GnuCash APIs, Python bindings, direct database writes, or `.gnucash` file manipulation.
 
-## Later Setup Steps
+## Confirmed Local Setup
 
-When the time comes, the user will need to be guided through:
+GnuCash is installed and the local demo file has been created outside the repo:
 
-1. Downloading and installing GnuCash on Windows 10.
-2. Creating a local demo company or book file.
-3. Saving the demo file locally.
-4. Opening the demo file manually.
-5. Confirming the exact menu path for creating a vendor.
-6. Confirming display scaling and screen resolution.
-7. Practicing the manual supplier/vendor creation flow.
+```text
+C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+```
+
+Actual screenshots have been captured in:
+
+```text
+C:\Users\Philip\Downloads\ERPAutomation\screenshots\input
+```
+
+See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md) for the observed screens, menu paths, field names, and Vision checkpoint catalogue.
+
+## Setup Steps Already Completed
+
+The following are complete:
+
+1. GnuCash installed locally.
+2. Demo company/book file created.
+3. Demo file saved outside the repository.
+4. Manual screenshots captured for the V1 path.
+5. Vendor creation and verification menu paths captured.
 
 ## Example Demo File Path
 
 ```text
-C:\Users\<YourUser>\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
 ```
 
 Do not commit `.gnucash` files.
 
 ## Manual Workflow To Confirm
 
-The intended workflow is approximately:
+The observed workflow is:
 
 ```text
 Open GnuCash
 Open demo company file
-Navigate to Business / Vendor / New Vendor
+Navigate to Business > Vendor > New Vendor...
 Enter supplier/vendor details
-Save
-Confirm vendor created
+Click OK
+Return to accounts screen
+Navigate to Business > Vendor > Vendors Overview
+Confirm vendor is visible
 Return to main screen
 Close GnuCash
 ```
 
-The exact labels and menu path must be confirmed against the installed GnuCash version before PAD steps are built.
+The exact labels are now captured in screenshots, but the final PAD build should still confirm address-line order, vendor number handling, and whether GnuCash should be explicitly saved before close.

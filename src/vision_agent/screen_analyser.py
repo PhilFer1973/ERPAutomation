@@ -17,10 +17,17 @@ from .openai_client import analyse_with_openai
 
 MOCK_SCREEN_STATES = {
     "GN_CASH_MAIN_SCREEN": "gnucash_main_screen_visible",
+    "BUSINESS_MENU_OPEN": "business_menu_open_visible",
+    "VENDOR_NEW_MENU_PATH": "vendor_new_menu_path_visible",
     "NEW_VENDOR_SCREEN": "new_vendor_screen_visible",
+    "NEW_VENDOR_FORM_BLANK": "new_vendor_blank_form_visible",
+    "NEW_VENDOR_FORM_COMPLETED": "new_vendor_completed_form_visible",
     "FIELD_VALUE_CHECK": "expected_field_value_visible",
     "SAVE_CONFIRMATION": "vendor_save_confirmation_visible",
+    "POST_SAVE_RETURN_SCREEN": "post_save_accounts_screen_visible",
+    "VENDOR_OVERVIEW_MENU_PATH": "vendor_overview_menu_path_visible",
     "FINAL_RECORD_CHECK": "created_vendor_record_visible",
+    "CREATED_VENDOR_VISIBLE": "created_vendor_visible_in_vendor_list",
     "ERROR_SCREEN_CHECK": "no_visible_error_detected",
 }
 
@@ -50,7 +57,11 @@ def build_checkpoint_prompt(request: VisionAnalysisRequest) -> str:
 def build_mock_response(request: VisionAnalysisRequest) -> Dict[str, Any]:
     """Return a valid fake Vision response for local development and tests."""
 
-    status = "complete_success" if request.checkpoint_type == "SAVE_CONFIRMATION" else "continue"
+    status = (
+        "complete_success"
+        if request.checkpoint_type in {"SAVE_CONFIRMATION", "CREATED_VENDOR_VISIBLE"}
+        else "continue"
+    )
     return {
         "checkpoint_type": request.checkpoint_type,
         "status": status,

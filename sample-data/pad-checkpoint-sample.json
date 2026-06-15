@@ -1,9 +1,9 @@
 {
   "run_id": "2026-06-15-143000-ABC123",
   "supplier_request_id": "42",
-  "checkpoint_type": "NEW_VENDOR_SCREEN",
-  "screenshot_path": "screenshots/archive/2026-06-15-143000-ABC123/step-002-new-vendor.png",
-  "expected_screen": "GnuCash New Vendor screen",
+  "checkpoint_type": "NEW_VENDOR_FORM_BLANK",
+  "screenshot_path": "screenshots/archive/2026-06-15-143000-ABC123/step-004-new-vendor-blank.png",
+  "expected_screen": "GnuCash New Vendor dialog with the Vendor tab selected",
   "expected_field": null,
   "expected_value": null,
   "supplier_context": {
