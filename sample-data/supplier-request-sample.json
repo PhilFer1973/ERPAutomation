@@ -1,0 +1,10 @@
+{
+  "supplier_legal_name": "Blue Kite Consulting Ltd",
+  "contact_name": "Sarah Ahmed",
+  "supplier_email": "sarah.ahmed@example.com",
+  "address": "10 Market Street",
+  "city": "London",
+  "postcode": "EC1A 1AA",
+  "country": "United Kingdom",
+  "currency": "GBP"
+}

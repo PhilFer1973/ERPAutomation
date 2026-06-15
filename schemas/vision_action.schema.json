@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/erpautomation/vision_action.schema.json",
+  "title": "Vision Checkpoint Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "checkpoint_type",
+    "status",
+    "screen_state",
+    "confidence",
+    "audit_comment",
+    "visible_errors",
+    "extracted_reference"
+  ],
+  "properties": {
+    "checkpoint_type": {
+      "type": "string",
+      "enum": [
+        "GN_CASH_MAIN_SCREEN",
+        "NEW_VENDOR_SCREEN",
+        "FIELD_VALUE_CHECK",
+        "SAVE_CONFIRMATION",
+        "FINAL_RECORD_CHECK",
+        "ERROR_SCREEN_CHECK"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "continue",
+        "stop_for_review",
+        "failed",
+        "complete_success"
+      ]
+    },
+    "screen_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "audit_comment": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visible_errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extracted_reference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

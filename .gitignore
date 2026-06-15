@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+logs/
+screenshots/input/
+screenshots/output/
+screenshots/archive/
+*.gnucash
+*.log
+.DS_Store
+Thumbs.db

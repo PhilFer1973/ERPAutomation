@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/erpautomation/supplier_request.schema.json",
+  "title": "Supplier Onboarding Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "supplier_legal_name",
+    "contact_name",
+    "supplier_email",
+    "address",
+    "city",
+    "postcode",
+    "country",
+    "currency"
+  ],
+  "properties": {
+    "supplier_legal_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contact_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supplier_email": {
+      "type": "string",
+      "format": "email"
+    },
+    "address": {
+      "type": "string",
+      "minLength": 1
+    },
+    "city": {
+      "type": "string",
+      "minLength": 1
+    },
+    "postcode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "country": {
+      "type": "string",
+      "minLength": 1
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    }
+  }
+}
