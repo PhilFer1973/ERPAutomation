@@ -33,6 +33,55 @@ REQUIRED_VISION_FIELDS = {
     "extracted_reference",
 }
 
+VISION_RESPONSE_JSON_SCHEMA: Dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": [
+        "checkpoint_type",
+        "status",
+        "screen_state",
+        "confidence",
+        "audit_comment",
+        "visible_errors",
+        "extracted_reference",
+    ],
+    "properties": {
+        "checkpoint_type": {
+            "type": "string",
+            "enum": sorted(CHECKPOINT_TYPES),
+            "description": "The checkpoint type supplied by Power Automate Desktop.",
+        },
+        "status": {
+            "type": "string",
+            "enum": sorted(ALLOWED_STATUSES),
+            "description": "Whether PAD should continue, stop, fail, or mark successful completion.",
+        },
+        "screen_state": {
+            "type": "string",
+            "description": "Short machine-readable description of the visible screen state.",
+        },
+        "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Model confidence from 0 to 1.",
+        },
+        "audit_comment": {
+            "type": "string",
+            "description": "Short audit-friendly explanation of the result.",
+        },
+        "visible_errors": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Visible error or warning messages found in the screenshot.",
+        },
+        "extracted_reference": {
+            "type": ["string", "null"],
+            "description": "Visible supplier/vendor reference if present.",
+        },
+    },
+}
+
 
 class SchemaValidationError(ValueError):
     """Raised when request or response JSON does not match the V1 contract."""

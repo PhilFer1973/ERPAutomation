@@ -1,6 +1,6 @@
 # Setup Guide
 
-This repository is currently in the foundation phase. You do not need to install or configure the external systems yet to review the docs, schemas, sample data, or mock Python helper.
+This repository can be reviewed and tested in mock mode without external systems. The real OpenAI Vision helper is scaffolded, but it should only be turned on when an API key and real screenshot are available.
 
 When the project moves into later phases, you will need to be guided step by step through creating, downloading, installing, or configuring the items below. Do not assume any of these already exist until confirmed.
 
@@ -33,6 +33,19 @@ pytest
 ```
 
 Mock mode is designed to avoid OpenAI API calls while the PAD and file handoff are being developed.
+
+## Real Vision Helper Setup
+
+When you are ready to test the real OpenAI Vision path, you will need to be guided through:
+
+1. Installing dependencies from `requirements.txt`.
+2. Creating an OpenAI API key.
+3. Copying `.env.example` to `.env`.
+4. Setting `OPENAI_API_KEY` in `.env`.
+5. Setting `MOCK_MODE=false`.
+6. Supplying a checkpoint JSON file that points to a real screenshot.
+
+The sample checkpoint file is safe for mock mode, but it does not point to a real screenshot yet.
 
 ## Environment File
 

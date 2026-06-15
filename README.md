@@ -31,7 +31,7 @@ External supplier form
 
 The V1 design uses Microsoft Forms to collect supplier details, SharePoint Lists as the operational queue and audit store, Power Automate Desktop as the executor, GnuCash as the local finance system, and a Python helper as the Vision validation layer.
 
-For this first foundation phase, the repository contains documentation, schemas, sample data, and a runnable Python mock mode. It does not yet automate GnuCash, Power Automate Desktop, SharePoint, or Microsoft Forms.
+The repository contains documentation, schemas, sample data, a runnable Python mock mode, and a real OpenAI Vision client path for later screenshot validation. It does not yet automate GnuCash, Power Automate Desktop, SharePoint, or Microsoft Forms.
 
 ## Architecture Summary
 
@@ -133,6 +133,19 @@ python src\vision_agent\main.py --input-json sample-data\pad-checkpoint-sample.j
 ```
 
 The sample PAD checkpoint file uses fictional data and is included only to make mock-mode smoke testing easy.
+
+## Real OpenAI Vision Mode
+
+The helper can call OpenAI Vision when `MOCK_MODE=false`, an `OPENAI_API_KEY` is present, and the checkpoint input points to a real `.png`, `.jpg`, `.jpeg`, or `.webp` screenshot.
+
+The real path uses the OpenAI Responses API with:
+
+- `input_text` for checkpoint instructions
+- `input_image` for the screenshot data URL
+- strict JSON schema output matching `schemas/vision_action.schema.json`
+- local validation and confidence policy after the API call
+
+Do not turn real mode on until you are ready to use an API key and a real screenshot. The included sample checkpoint deliberately points to a future screenshot path that does not exist yet.
 
 ## Security And Data Warnings
 

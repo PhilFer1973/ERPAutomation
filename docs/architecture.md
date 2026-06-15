@@ -27,7 +27,7 @@ External supplier
 | Power Automate Desktop | Execute the controlled desktop steps |
 | GnuCash | Simulated legacy finance system |
 | Python helper | Validate Vision JSON, apply confidence rules, and write logs |
-| OpenAI Vision | Inspect screenshots and return structured validation results |
+| OpenAI Vision | Inspect screenshots through the Responses API and return structured validation results |
 
 ## Data Flow
 
@@ -35,7 +35,7 @@ Supplier data begins in Microsoft Forms and becomes a SharePoint item. PAD reads
 
 ## Control Flow
 
-PAD performs a known step, captures a screenshot, and asks the Python helper to validate that checkpoint. The helper returns a simple status such as `continue`, `stop_for_review`, `failed`, or `complete_success`.
+PAD performs a known step, captures a screenshot, and asks the Python helper to validate that checkpoint. The helper uses mock mode by default, or the OpenAI Responses API when real Vision mode is enabled. It returns a simple status such as `continue`, `stop_for_review`, `failed`, or `complete_success`.
 
 PAD only continues when the checkpoint response is valid and confidence meets the configured threshold.
 

@@ -73,6 +73,25 @@ Mock mode supports:
 - demos without API calls
 - development without OpenAI cost
 
+## Real OpenAI Vision Mode
+
+When `MOCK_MODE=false`, the helper calls OpenAI through the Responses API. The request includes:
+
+- system-level instructions that constrain the model to validation only
+- `input_text` containing the checkpoint prompt
+- `input_image` containing the screenshot as a base64 data URL
+- a strict JSON schema response format matching `schemas/vision_action.schema.json`
+
+After the API call, the helper still validates the JSON locally and applies the confidence policy before returning anything to PAD.
+
+Real mode requires:
+
+- `OPENAI_API_KEY` in `.env`
+- a supported screenshot file type: `.png`, `.jpg`, `.jpeg`, or `.webp`
+- a checkpoint request whose `screenshot_path` points to an existing file
+
+If the API returns malformed JSON, an unsupported status, a mismatched checkpoint, or a low-confidence result, the helper stops or marks the checkpoint for review according to the V1 policy.
+
 ## Replay Mode Idea
 
 Replay mode is a future option where saved screenshots can be analyzed again without running PAD or GnuCash. This would help improve prompts, compare model output, and build repeatable demos.

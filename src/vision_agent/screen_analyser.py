@@ -1,4 +1,4 @@
-"""Screen analysis orchestration for mock and future Vision-backed modes."""
+"""Screen analysis orchestration for mock and Vision-backed modes."""
 
 from __future__ import annotations
 
@@ -26,18 +26,24 @@ MOCK_SCREEN_STATES = {
 
 
 def build_checkpoint_prompt(request: VisionAnalysisRequest) -> str:
-    """Build a compact checkpoint prompt for the future real Vision call."""
+    """Build a compact checkpoint prompt for the real Vision call."""
 
     parts = [
         "You are validating a desktop finance automation checkpoint.",
         f"Checkpoint type: {request.checkpoint_type}",
         f"Expected screen: {request.expected_screen}",
+        "Inspect the screenshot only for this checkpoint.",
+        "If the expected screen, field, or value is not visible, stop the workflow.",
+        "Use the supplied checkpoint_type exactly in the JSON response.",
         "Return only strict JSON that matches schemas/vision_action.schema.json.",
     ]
     if request.expected_field:
         parts.append(f"Expected field: {request.expected_field}")
     if request.expected_value:
         parts.append(f"Expected value: {request.expected_value}")
+    if request.supplier_context:
+        parts.append("Supplier context:")
+        parts.extend(f"- {key}: {value}" for key, value in request.supplier_context.items())
     return "\n".join(parts)
 
 
