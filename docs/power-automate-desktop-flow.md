@@ -4,6 +4,8 @@ This document describes the planned PAD flow. It is not built in this phase.
 
 The current design is based on actual GnuCash screenshots captured from the local demo file. See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md).
 
+The confirmed manual workflow and close-out sequence are documented in [gnucash-manual-vendor-creation-steps.md](gnucash-manual-vendor-creation-steps.md).
+
 ## PAD Responsibility
 
 PAD is the executor. It opens applications, navigates known screens, enters data, takes screenshots, calls the Python helper, and updates status.
@@ -41,7 +43,9 @@ Open Vendors Overview
 Take screenshot
 Run Vision checkpoint: CREATED_VENDOR_VISIBLE
 Update SharePoint status
-Close GnuCash
+Return to main screen
+Click File > Save
+Click File > Quit
 ```
 
 ## Observed GnuCash Field Mapping
@@ -58,7 +62,9 @@ Close GnuCash
 
 The observed screenshots leave `Vendor Number` blank and GnuCash then displays vendor number `000001` in the Vendors tab.
 
-`Currency` is not visible in the captured New Vendor `Vendor` tab and should not be forced into the UI path without a confirmed visible target field.
+`Currency` is not visible in the captured New Vendor `Vendor` tab and is confirmed to remain in SharePoint/Form data only for V1.
+
+The confirmed close-out behavior is to save the GnuCash book through `File > Save` before quitting.
 
 ## PAD To Python Handoff
 

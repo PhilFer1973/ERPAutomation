@@ -33,6 +33,19 @@ Current GnuCash screenshot input folder:
 C:\Users\Philip\Downloads\ERPAutomation\screenshots\input
 ```
 
+Confirmed manual GnuCash workflow:
+
+```text
+Business > Vendor > New Vendor...
+Enter V1 supplier fields
+OK
+Business > Vendor > Vendors Overview
+Confirm created vendor visible
+Return to main screen
+File > Save
+File > Quit
+```
+
 ## Foundation-Only Local Test
 
 Once Python is available, the mock helper can be tested without external systems:

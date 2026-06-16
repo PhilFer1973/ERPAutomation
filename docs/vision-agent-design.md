@@ -48,6 +48,8 @@ C:\Users\Philip\Downloads\ERPAutomation\screenshots\input
 
 See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md) for the detailed evidence and field mapping.
 
+The future PAD flow should not treat `POST_SAVE_RETURN_SCREEN` as final success. It should verify `CREATED_VENDOR_VISIBLE`, update status, return to the main screen, save the GnuCash book through `File > Save`, and then quit GnuCash.
+
 ## Strict JSON Output
 
 Vision responses must contain:

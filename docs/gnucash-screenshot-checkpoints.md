@@ -85,13 +85,15 @@ The `Vendor` tab contains:
 
 The `POST_SAVE_RETURN_SCREEN` checkpoint is not enough by itself to prove the vendor was created. It only proves GnuCash returned to the accounts screen after the `OK` action. The final proof is the `CREATED_VENDOR_VISIBLE` checkpoint on the Vendors tab.
 
-The asterisk in the GnuCash window title after saving the vendor suggests the GnuCash book has unsaved changes. Later PAD design should handle this deliberately, most likely by saving the book before closing. That behavior is not implemented yet.
+The asterisk in the GnuCash window title after saving the vendor suggests the GnuCash book has unsaved changes. The confirmed V1 close-out design is to return to the main screen, click `File > Save`, then click `File > Quit`.
 
-## Questions To Confirm Before PAD Build
+## Confirmed V1 Decisions
 
-Before building the PAD flow, confirm:
+The following decisions have been confirmed before the PAD build:
 
-- Whether `Vendor Number` should always be left blank for GnuCash to auto-assign.
-- Whether the address line order should remain `Address`, `City`, `Country`, `Postcode`.
-- Whether the final PAD flow should click toolbar `Save` after vendor creation before closing GnuCash.
-- Whether `Currency` should remain outside GnuCash V1 entry because no visible field appeared in the captured `Vendor` tab.
+- Leave `Vendor Number` blank so GnuCash auto-assigns it.
+- Enter address lines as `Address`, `City`, `Country`, `Postcode`.
+- After confirming the created vendor is visible, return to the main screen, click `File > Save`, then click `File > Quit`.
+- Keep `Currency` in SharePoint/Form data only for V1 because no visible currency field appeared in the captured `Vendor` tab.
+
+See [gnucash-manual-vendor-creation-steps.md](gnucash-manual-vendor-creation-steps.md) for the manual step reference.

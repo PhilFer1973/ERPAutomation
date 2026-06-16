@@ -20,6 +20,8 @@ C:\Users\Philip\Downloads\ERPAutomation\screenshots\input
 
 See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md) for the observed screens, menu paths, field names, and Vision checkpoint catalogue.
 
+See [gnucash-manual-vendor-creation-steps.md](gnucash-manual-vendor-creation-steps.md) for the confirmed manual workflow and close-out sequence.
+
 ## Setup Steps Already Completed
 
 The following are complete:
@@ -52,7 +54,9 @@ Return to accounts screen
 Navigate to Business > Vendor > Vendors Overview
 Confirm vendor is visible
 Return to main screen
-Close GnuCash
+Click File > Save
+Click File > Quit
+GnuCash closes
 ```
 
-The exact labels are now captured in screenshots, but the final PAD build should still confirm address-line order, vendor number handling, and whether GnuCash should be explicitly saved before close.
+The exact labels are now captured in screenshots. V1 should leave `Vendor Number` blank, enter address lines as `Address`, `City`, `Country`, `Postcode`, keep `Currency` outside GnuCash UI entry, and explicitly save the GnuCash book before quitting.
