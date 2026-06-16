@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/erpautomation/pad_checkpoint_request.schema.json",
+  "title": "PAD Checkpoint Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "supplier_request_id",
+    "checkpoint_type",
+    "screenshot_path",
+    "expected_screen"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supplier_request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checkpoint_type": {
+      "type": "string",
+      "enum": [
+        "GN_CASH_MAIN_SCREEN",
+        "BUSINESS_MENU_OPEN",
+        "VENDOR_NEW_MENU_PATH",
+        "NEW_VENDOR_SCREEN",
+        "NEW_VENDOR_FORM_BLANK",
+        "NEW_VENDOR_FORM_COMPLETED",
+        "FIELD_VALUE_CHECK",
+        "SAVE_CONFIRMATION",
+        "POST_SAVE_RETURN_SCREEN",
+        "VENDOR_OVERVIEW_MENU_PATH",
+        "FINAL_RECORD_CHECK",
+        "CREATED_VENDOR_VISIBLE",
+        "ERROR_SCREEN_CHECK"
+      ]
+    },
+    "screenshot_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_screen": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_field": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expected_value": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supplier_context": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "run_id": "DEMO-RUN-001",
+  "supplier_request_id": "42",
+  "checkpoint_type": "NEW_VENDOR_FORM_BLANK",
+  "screenshot_path": "screenshots/archive/DEMO-RUN-001/step-004-new-vendor-blank-form.png",
+  "expected_screen": "GnuCash New Vendor dialog with Vendor tab selected and blank entry fields",
+  "expected_field": "Company Name",
+  "expected_value": null,
+  "supplier_context": {
+    "supplier_legal_name": "Blue Kite Consulting Ltd"
+  }
+}

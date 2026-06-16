@@ -1,0 +1,12 @@
+{
+  "run_id": "DEMO-RUN-001",
+  "supplier_request_id": "42",
+  "checkpoint_type": "CREATED_VENDOR_VISIBLE",
+  "screenshot_path": "screenshots/archive/DEMO-RUN-001/step-008-created-vendor-visible.png",
+  "expected_screen": "GnuCash Vendors tab showing the created supplier row",
+  "expected_field": "Company Name",
+  "expected_value": "Blue Kite Consulting Ltd",
+  "supplier_context": {
+    "supplier_legal_name": "Blue Kite Consulting Ltd"
+  }
+}

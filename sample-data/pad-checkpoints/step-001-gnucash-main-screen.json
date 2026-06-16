@@ -1,0 +1,12 @@
+{
+  "run_id": "DEMO-RUN-001",
+  "supplier_request_id": "42",
+  "checkpoint_type": "GN_CASH_MAIN_SCREEN",
+  "screenshot_path": "screenshots/archive/DEMO-RUN-001/step-001-gnucash-main-screen.png",
+  "expected_screen": "GnuCash Accounts screen for VisionAutomationDemo.gnucash",
+  "expected_field": null,
+  "expected_value": null,
+  "supplier_context": {
+    "supplier_legal_name": "Blue Kite Consulting Ltd"
+  }
+}

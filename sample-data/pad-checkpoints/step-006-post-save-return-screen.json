@@ -1,0 +1,12 @@
+{
+  "run_id": "DEMO-RUN-001",
+  "supplier_request_id": "42",
+  "checkpoint_type": "POST_SAVE_RETURN_SCREEN",
+  "screenshot_path": "screenshots/archive/DEMO-RUN-001/step-006-post-save-return-screen.png",
+  "expected_screen": "GnuCash Accounts screen after clicking OK on the New Vendor dialog",
+  "expected_field": null,
+  "expected_value": null,
+  "supplier_context": {
+    "supplier_legal_name": "Blue Kite Consulting Ltd"
+  }
+}

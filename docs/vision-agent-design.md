@@ -50,6 +50,8 @@ See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md) for t
 
 The future PAD flow should not treat `POST_SAVE_RETURN_SCREEN` as final success. It should verify `CREATED_VENDOR_VISIBLE`, update status, return to the main screen, save the GnuCash book through `File > Save`, and then quit GnuCash.
 
+The PAD-facing checkpoint request examples live in `sample-data/pad-checkpoints/`, and the full sequence is defined in `pad/checkpoint-manifest.json`.
+
 ## Strict JSON Output
 
 Vision responses must contain:

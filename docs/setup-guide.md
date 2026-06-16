@@ -46,6 +46,8 @@ File > Save
 File > Quit
 ```
 
+The next local setup activity is to create the Power Automate Desktop flow manually from [pad-build-guide.md](pad-build-guide.md). Start in `MOCK_MODE=true` so the PAD/Python handoff can be tested without live OpenAI calls.
+
 ## Foundation-Only Local Test
 
 Once Python is available, the mock helper can be tested without external systems:

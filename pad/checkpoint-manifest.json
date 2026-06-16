@@ -1,0 +1,128 @@
+{
+  "manifest_version": "1.0",
+  "flow_name": "ERPAutomation_GnuCash_Vendor_Onboarding_V1",
+  "purpose": "Power Automate Desktop checkpoint scaffold for GnuCash supplier/vendor creation.",
+  "runtime_roots": {
+    "repo_root": "C:\\Users\\Philip\\Downloads\\ERPAutomation",
+    "gnucash_file": "C:\\Users\\Philip\\Documents\\GnuCash\\VisionAutomationDemo.gnucash",
+    "python_entrypoint": "src\\vision_agent\\main.py",
+    "screenshot_archive_pattern": "screenshots\\archive\\{RunId}",
+    "log_root": "logs"
+  },
+  "confirmed_decisions": {
+    "vendor_number": "Leave blank so GnuCash auto-assigns it.",
+    "address_line_order": [
+      "Address",
+      "City",
+      "Country",
+      "Postcode"
+    ],
+    "currency_handling": "Keep in Microsoft Forms/SharePoint only for V1.",
+    "close_out": "After vendor verification, return to main screen, use File > Save, then File > Quit."
+  },
+  "checkpoints": [
+    {
+      "step_number": 1,
+      "step_name": "Confirm GnuCash main accounts screen",
+      "checkpoint_type": "GN_CASH_MAIN_SCREEN",
+      "screenshot_file": "step-001-gnucash-main-screen.png",
+      "expected_screen": "GnuCash Accounts screen for VisionAutomationDemo.gnucash",
+      "expected_field": null,
+      "expected_value_source": null,
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 2,
+      "step_name": "Confirm Business menu is open",
+      "checkpoint_type": "BUSINESS_MENU_OPEN",
+      "screenshot_file": "step-002-business-menu-open.png",
+      "expected_screen": "GnuCash Business menu open with Vendor submenu available",
+      "expected_field": "Business menu",
+      "expected_value_source": "Vendor",
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 3,
+      "step_name": "Confirm New Vendor menu path",
+      "checkpoint_type": "VENDOR_NEW_MENU_PATH",
+      "screenshot_file": "step-003-vendor-new-menu-path.png",
+      "expected_screen": "GnuCash Business > Vendor submenu with New Vendor visible",
+      "expected_field": "Vendor submenu",
+      "expected_value_source": "New Vendor...",
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 4,
+      "step_name": "Confirm blank New Vendor form",
+      "checkpoint_type": "NEW_VENDOR_FORM_BLANK",
+      "screenshot_file": "step-004-new-vendor-blank-form.png",
+      "expected_screen": "GnuCash New Vendor dialog with Vendor tab selected and blank entry fields",
+      "expected_field": "Company Name",
+      "expected_value_source": null,
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 5,
+      "step_name": "Confirm completed New Vendor form before OK",
+      "checkpoint_type": "NEW_VENDOR_FORM_COMPLETED",
+      "screenshot_file": "step-005-new-vendor-completed-before-save.png",
+      "expected_screen": "GnuCash New Vendor dialog populated with supplier values before OK",
+      "expected_field": "Company Name",
+      "expected_value_source": "SupplierLegalName",
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 6,
+      "step_name": "Confirm return to accounts screen after OK",
+      "checkpoint_type": "POST_SAVE_RETURN_SCREEN",
+      "screenshot_file": "step-006-post-save-return-screen.png",
+      "expected_screen": "GnuCash Accounts screen after clicking OK on the New Vendor dialog",
+      "expected_field": null,
+      "expected_value_source": null,
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 7,
+      "step_name": "Confirm Vendors Overview menu path",
+      "checkpoint_type": "VENDOR_OVERVIEW_MENU_PATH",
+      "screenshot_file": "step-007-vendor-overview-menu-path.png",
+      "expected_screen": "GnuCash Business > Vendor submenu with Vendors Overview visible",
+      "expected_field": "Vendor submenu",
+      "expected_value_source": "Vendors Overview",
+      "continue_statuses": [
+        "continue"
+      ]
+    },
+    {
+      "step_number": 8,
+      "step_name": "Confirm created vendor is visible",
+      "checkpoint_type": "CREATED_VENDOR_VISIBLE",
+      "screenshot_file": "step-008-created-vendor-visible.png",
+      "expected_screen": "GnuCash Vendors tab showing the created supplier row",
+      "expected_field": "Company Name",
+      "expected_value_source": "SupplierLegalName",
+      "continue_statuses": [
+        "complete_success"
+      ]
+    }
+  ],
+  "failure_policy": {
+    "stop_statuses": [
+      "stop_for_review",
+      "failed"
+    ],
+    "on_failure": "Stop the current supplier, log the checkpoint result, update SharePoint as Failed or Needs Review, and do not continue entering or saving data."
+  }
+}

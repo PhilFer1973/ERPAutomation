@@ -1,0 +1,15 @@
+{
+  "run_id": "DEMO-RUN-001",
+  "supplier_request_id": "42",
+  "checkpoint_type": "NEW_VENDOR_FORM_COMPLETED",
+  "screenshot_path": "screenshots/archive/DEMO-RUN-001/step-005-new-vendor-completed-before-save.png",
+  "expected_screen": "GnuCash New Vendor dialog populated with supplier values before OK",
+  "expected_field": "Company Name",
+  "expected_value": "Blue Kite Consulting Ltd",
+  "supplier_context": {
+    "supplier_legal_name": "Blue Kite Consulting Ltd",
+    "contact_name": "Sarah Ahmed",
+    "supplier_email": "sarah.ahmed@example.com",
+    "address_line_order": "Address, City, Country, Postcode"
+  }
+}

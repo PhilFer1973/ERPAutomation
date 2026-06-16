@@ -6,6 +6,8 @@ The current design is based on actual GnuCash screenshots captured from the loca
 
 The confirmed manual workflow and close-out sequence are documented in [gnucash-manual-vendor-creation-steps.md](gnucash-manual-vendor-creation-steps.md).
 
+The PAD build scaffold is documented in [pad-build-guide.md](pad-build-guide.md), with a machine-readable checkpoint manifest at `pad/checkpoint-manifest.json`.
+
 ## PAD Responsibility
 
 PAD is the executor. It opens applications, navigates known screens, enters data, takes screenshots, calls the Python helper, and updates status.

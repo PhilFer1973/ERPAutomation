@@ -35,6 +35,8 @@ The repository contains documentation, schemas, sample data, a runnable Python m
 
 Actual GnuCash screenshots have now been captured from the local demo file and are reflected in the checkpoint design. See [docs/gnucash-screenshot-checkpoints.md](docs/gnucash-screenshot-checkpoints.md).
 
+The Power Automate Desktop build scaffold is documented in [docs/pad-build-guide.md](docs/pad-build-guide.md), with checkpoint request samples in `sample-data/pad-checkpoints/`.
+
 ## Architecture Summary
 
 ```text

@@ -1,0 +1,12 @@
+{
+  "run_id": "DEMO-RUN-001",
+  "supplier_request_id": "42",
+  "checkpoint_type": "VENDOR_NEW_MENU_PATH",
+  "screenshot_path": "screenshots/archive/DEMO-RUN-001/step-003-vendor-new-menu-path.png",
+  "expected_screen": "GnuCash Business > Vendor submenu with New Vendor visible",
+  "expected_field": "Vendor submenu",
+  "expected_value": "New Vendor...",
+  "supplier_context": {
+    "supplier_legal_name": "Blue Kite Consulting Ltd"
+  }
+}
