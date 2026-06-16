@@ -4,6 +4,8 @@ This guide describes how to build the V1 Power Automate Desktop flow from the co
 
 The future PAD flow should be built manually in Power Automate Desktop using this guide, then tested first in mock mode and only later with live OpenAI Vision.
 
+For a more granular step-by-step build list, use [pad-action-checklist.md](pad-action-checklist.md).
+
 ## Key Files
 
 | File | Purpose |

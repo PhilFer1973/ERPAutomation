@@ -8,6 +8,8 @@ The confirmed manual workflow and close-out sequence are documented in [gnucash-
 
 The PAD build scaffold is documented in [pad-build-guide.md](pad-build-guide.md), with a machine-readable checkpoint manifest at `pad/checkpoint-manifest.json`.
 
+The detailed PAD action checklist is documented in [pad-action-checklist.md](pad-action-checklist.md).
+
 ## PAD Responsibility
 
 PAD is the executor. It opens applications, navigates known screens, enters data, takes screenshots, calls the Python helper, and updates status.
