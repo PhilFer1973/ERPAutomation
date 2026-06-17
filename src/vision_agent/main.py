@@ -27,7 +27,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
     input_path = Path(args.input_json)
-    payload = json.loads(input_path.read_text(encoding="utf-8"))
+    # PAD commonly writes UTF-8 files with a BOM, so accept that transparently.
+    payload = json.loads(input_path.read_text(encoding="utf-8-sig"))
 
     result = analyse_screen(payload, AgentConfig.from_env())
 

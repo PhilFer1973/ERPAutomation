@@ -106,6 +106,8 @@ Python should return JSON that PAD can read:
 }
 ```
 
+For the current build, PAD should call Python through `Run application` rather than `Run DOS command`, because that launch path has already been proven working with the local venv and helper script.
+
 ## Navigation Preference Order
 
 Use this order where possible:

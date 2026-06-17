@@ -91,10 +91,14 @@ For each checkpoint:
 
 1. PAD takes a screenshot and saves it to `%RunScreenshotDir%`.
 2. PAD writes a checkpoint request JSON file to `%RunInputDir%`.
-3. PAD runs Python:
+3. PAD runs Python.
 
-```powershell
-%PythonExe% %PythonHelper% --input-json "%InputJsonPath%" --output-json "%OutputJsonPath%"
+For the current build, prefer PAD `Run application` with:
+
+```text
+Application path: %PythonExe%
+Command line arguments: "%PythonHelper%" --input-json "%InputJsonPath%" --output-json "%OutputJsonPath%"
+Working folder: %RepoRoot%
 ```
 
 4. PAD reads `%OutputJsonPath%`.
@@ -156,6 +160,10 @@ MOCK_MODE=false
 ```
 
 Live mode should be tested on fictional data only.
+
+Current milestone:
+
+- The first `GN_CASH_MAIN_SCREEN` mock-mode checkpoint has completed end-to-end from PAD into Python and back into PAD.
 
 ## Not In This Phase
 

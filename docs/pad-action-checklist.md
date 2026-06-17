@@ -176,17 +176,17 @@ For blank `ExpectedField` or `ExpectedValue`, use JSON `null` rather than an emp
 
 ### Python Command
 
-Use a PAD command-line action such as `Run DOS command` or equivalent:
+Use PAD `Run application` for the Python helper. In the current build, this proved more reliable than `Run DOS command`.
+
+Recommended settings:
 
 ```text
-"%PythonExe%" "%PythonHelper%" --input-json "%InputJsonPath%" --output-json "%OutputJsonPath%"
+Application path: %PythonExe%
+Command line arguments: "%PythonHelper%" --input-json "%InputJsonPath%" --output-json "%OutputJsonPath%"
+Working folder: %RepoRoot%
 ```
 
-Set the working folder to:
-
-```text
-%RepoRoot%
-```
+Choose the option that waits for the application to complete before the flow continues.
 
 ## 6. StopForFailure Subflow
 
@@ -269,6 +269,15 @@ MOCK_MODE=false
 
 Only use fictional supplier data.
 
+First confirmed milestone:
+
+- PAD launched GnuCash successfully.
+- PAD created runtime folders.
+- PAD captured the first screenshot.
+- PAD wrote the first checkpoint request JSON.
+- PAD called the Python helper successfully by using `Run application`.
+- The helper returned valid mock JSON for `GN_CASH_MAIN_SCREEN`.
+
 ## 9. Known Build Risks
 
 | Risk | Mitigation |
@@ -276,6 +285,7 @@ Only use fictional supplier data.
 | PAD cannot reliably find a UI element | Use menu/keyboard shortcuts before coordinates |
 | Window focus changes before screenshot | Add waits and ensure GnuCash window is active |
 | JSON string escaping is awkward in PAD | Start with simple fictional values; avoid quote characters in test data |
+| PAD writes UTF-8 files with a BOM | Python helper now accepts `utf-8-sig` input |
 | `.env` is set to live mode during mock testing | Set `MOCK_MODE=true` before first PAD run |
 | Repeated mock tests create duplicate demo vendors | Use unique fictional supplier names or reset the demo file between runs |
 | GnuCash prompts on quit | Save through `File > Save` before `File > Quit`; document any prompt if it appears |
