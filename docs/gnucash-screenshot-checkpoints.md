@@ -7,7 +7,7 @@ This document records the actual GnuCash screens captured for the V1 supplier on
 Demo file:
 
 ```text
-C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\VisionAutomationDemo.gnucash
 ```
 
 Screenshot folder:

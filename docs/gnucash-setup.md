@@ -9,7 +9,7 @@ GnuCash will be treated as a UI-only legacy finance system. The automation must 
 GnuCash is installed and the local demo file has been created outside the repo:
 
 ```text
-C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\VisionAutomationDemo.gnucash
 ```
 
 Actual screenshots have been captured in:
@@ -35,7 +35,7 @@ The following are complete:
 ## Example Demo File Path
 
 ```text
-C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\VisionAutomationDemo.gnucash
 ```
 
 Do not commit `.gnucash` files.

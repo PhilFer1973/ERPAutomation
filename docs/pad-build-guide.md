@@ -1,8 +1,8 @@
 # Power Automate Desktop Build Guide
 
-This guide describes how to build the V1 Power Automate Desktop flow from the confirmed GnuCash screenshots and Python helper contract. It is a controlled build guide, not an exported PAD flow file.
+This guide describes the V1 Power Automate Desktop flow from the confirmed GnuCash screenshots and Python helper contract. It is a controlled build guide, not an exported PAD flow file.
 
-The future PAD flow should be built manually in Power Automate Desktop using this guide, then tested first in mock mode and only later with live OpenAI Vision.
+The flow has now been manually built and proven locally in mock mode. This guide reflects the working build and should be treated as the reference for reproducing or tidying that flow.
 
 For a more granular step-by-step build list, use [pad-action-checklist.md](pad-action-checklist.md).
 
@@ -32,7 +32,7 @@ ERPAutomation_GnuCash_Vendor_Onboarding_V1
 - Demo file is stored outside the repo:
 
 ```text
-C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\VisionAutomationDemo.gnucash
 ```
 
 - Repo root is:
@@ -60,7 +60,7 @@ Create PAD variables equivalent to:
 | Variable | Example | Notes |
 |---|---|---|
 | `RepoRoot` | `C:\Users\Philip\Downloads\ERPAutomation` | Base path for helper and runtime files |
-| `GnuCashFilePath` | `C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash` | Demo book file |
+| `GnuCashFilePath` | `C:\Users\Philip\Documents\VisionAutomationDemo.gnucash` | Demo book file |
 | `PythonExe` | `%RepoRoot%\.venv\Scripts\python.exe` | Local venv Python |
 | `PythonHelper` | `%RepoRoot%\src\vision_agent\main.py` | Helper entrypoint |
 | `RunId` | `yyyyMMdd-HHmmss-{SharePointItemId}` | Unique per supplier |
@@ -106,6 +106,13 @@ Working folder: %RepoRoot%
 6. PAD continues only when the returned `status` is allowed for that checkpoint.
 7. PAD stops and logs when `status` is `stop_for_review` or `failed`.
 
+For the working local build:
+
+- use `Window style = Hidden`
+- use `After application launch = Wait for application to complete`
+- reuse `InputJsonPath` and `OutputJsonPath` as the current checkpoint paths
+- keep the stop branch that displays `%FailureReason%` when a checkpoint does not return `continue`
+
 ## Checkpoint Sequence
 
 Use `pad/checkpoint-manifest.json` as the machine-readable reference.
@@ -121,6 +128,25 @@ Use `pad/checkpoint-manifest.json` as the machine-readable reference.
 | 7 | Open `Business > Vendor`; capture `Vendors Overview` path | `VENDOR_OVERVIEW_MENU_PATH` |
 | 8 | Open `Vendors Overview`; capture created vendor row | `CREATED_VENDOR_VISIBLE` |
 | 9 | Return to main screen, use `File > Save`, then `File > Quit` | No Vision checkpoint required in V1 unless close prompts appear |
+
+## Confirmed Interaction Pattern
+
+The working PAD build did not end up using a single interaction method everywhere.
+
+- Main menu navigation uses a mix of:
+  - `Focus window`
+  - image-based clicks
+  - mouse coordinates relative to `Active window`
+  - explicit waits
+- The Python helper runs hidden so it does not steal visible focus from GnuCash.
+- The `New Vendor` form fields are entered with keyboard actions because PAD did not reliably expose the individual text fields as addressable UI elements.
+- The flow relies on the `Company Name` field already being focused when the `New Vendor` dialog opens, then uses `Tab` sequencing through the remaining fields.
+
+## V2 Hardening Deferred
+
+The V1 demo flow is sensitive to GnuCash reopening on the last-used screen. A production-ready version should add startup reset logic or force a closed-app launch before checkpoint 1.
+
+That reset logic is intentionally deferred to V2 so the current flow can stay focused on proving end-to-end creation and verification.
 
 ## Failure Handling
 
@@ -163,7 +189,9 @@ Live mode should be tested on fictional data only.
 
 Current milestone:
 
-- The first `GN_CASH_MAIN_SCREEN` mock-mode checkpoint has completed end-to-end from PAD into Python and back into PAD.
+- the full create-vendor demo path has completed in PAD through `CREATED_VENDOR_VISIBLE`
+- the Python helper handoff is working for all confirmed checkpoints
+- menu navigation and form entry are proven for the local demo setup
 
 ## Not In This Phase
 

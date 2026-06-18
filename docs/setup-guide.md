@@ -24,7 +24,7 @@ You will need guidance for:
 Current GnuCash demo file:
 
 ```text
-C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\VisionAutomationDemo.gnucash
 ```
 
 Current GnuCash screenshot input folder:

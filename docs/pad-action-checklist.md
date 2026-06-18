@@ -1,6 +1,6 @@
 # Power Automate Desktop Action Checklist
 
-This checklist expands the accepted PAD build guide into concrete build blocks for the first manual Power Automate Desktop implementation.
+This checklist expands the PAD build guide into concrete build blocks for the manual Power Automate Desktop implementation that has now been proven locally.
 
 Build this in layers:
 
@@ -19,7 +19,7 @@ Confirm these local files and folders exist:
 C:\Users\Philip\Downloads\ERPAutomation
 C:\Users\Philip\Downloads\ERPAutomation\.venv\Scripts\python.exe
 C:\Users\Philip\Downloads\ERPAutomation\src\vision_agent\main.py
-C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash
+C:\Users\Philip\Documents\VisionAutomationDemo.gnucash
 ```
 
 For the first PAD handoff test, set `.env` to:
@@ -49,6 +49,8 @@ Recommended subflows:
 
 If you prefer a simpler first pass, build everything in `Main` first, then refactor into subflows after the first successful mock run.
 
+The current working build was completed mainly in `Main` with repeated inline checkpoint blocks.
+
 ## 2. Main Variables
 
 Create these variables in PAD.
@@ -56,7 +58,7 @@ Create these variables in PAD.
 | Variable | Example value |
 |---|---|
 | `RepoRoot` | `C:\Users\Philip\Downloads\ERPAutomation` |
-| `GnuCashFilePath` | `C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash` |
+| `GnuCashFilePath` | `C:\Users\Philip\Documents\VisionAutomationDemo.gnucash` |
 | `PythonExe` | `%RepoRoot%\.venv\Scripts\python.exe` |
 | `PythonHelper` | `%RepoRoot%\src\vision_agent\main.py` |
 | `RunId` | `MANUAL-TEST-001` for the first build |
@@ -98,7 +100,7 @@ Build these actions at the start of the flow.
 | Step | PAD action intent | Details |
 |---:|---|---|
 | 1 | Set variable | `RepoRoot = C:\Users\Philip\Downloads\ERPAutomation` |
-| 2 | Set variable | `GnuCashFilePath = C:\Users\Philip\Documents\GnuCash\VisionAutomationDemo.gnucash` |
+| 2 | Set variable | `GnuCashFilePath = C:\Users\Philip\Documents\VisionAutomationDemo.gnucash` |
 | 3 | Set variable | `PythonExe = %RepoRoot%\.venv\Scripts\python.exe` |
 | 4 | Set variable | `PythonHelper = %RepoRoot%\src\vision_agent\main.py` |
 | 5 | Set variable | `RunId = MANUAL-TEST-001` for first test |
@@ -188,6 +190,12 @@ Working folder: %RepoRoot%
 
 Choose the option that waits for the application to complete before the flow continues.
 
+For the working local build, also set:
+
+```text
+Window style: Hidden
+```
+
 ## 6. StopForFailure Subflow
 
 Use one central branch for any checkpoint that returns `stop_for_review`, `failed`, or an unexpected status.
@@ -211,21 +219,21 @@ Build this sequence after `InitializeRun`.
 | 1 | Launch application or open file | Open `VisionAutomationDemo.gnucash` |
 | 2 | Wait | Wait until GnuCash Accounts screen is visible |
 | 3 | Run checkpoint | `GN_CASH_MAIN_SCREEN`, screenshot `step-001-gnucash-main-screen.png`, allowed `continue` |
-| 4 | Click menu | Click `Business` |
+| 4 | Click menu | Focus GnuCash and click `Business` using the working local action sequence |
 | 5 | Run checkpoint | `BUSINESS_MENU_OPEN`, screenshot `step-002-business-menu-open.png`, allowed `continue` |
-| 6 | Click menu item | Click or hover `Vendor` |
+| 6 | Click menu item | Open `Vendor` using the working local action sequence |
 | 7 | Run checkpoint | `VENDOR_NEW_MENU_PATH`, screenshot `step-003-vendor-new-menu-path.png`, allowed `continue` |
-| 8 | Click menu item | Click `New Vendor...` |
+| 8 | Click menu item | Click `New Vendor...` using the working local action sequence |
 | 9 | Wait | Wait until the `New Vendor` dialog is visible |
 | 10 | Run checkpoint | `NEW_VENDOR_FORM_BLANK`, screenshot `step-004-new-vendor-blank-form.png`, allowed `continue` |
 | 11 | Enter text | Leave `Vendor Number` blank |
-| 12 | Enter text | `Company Name = %SupplierLegalName%` |
-| 13 | Enter text | `Payment Address > Name = %ContactName%` |
-| 14 | Enter text | Address line 1 = `%Address%` |
-| 15 | Enter text | Address line 2 = `%City%` |
-| 16 | Enter text | Address line 3 = `%Country%` |
-| 17 | Enter text | Address line 4 = `%Postcode%` |
-| 18 | Enter text | `Email = %SupplierEmail%` |
+| 12 | Enter text | Use keyboard entry for `Company Name = %SupplierLegalName%` |
+| 13 | Enter text | Use `Tab` and keyboard entry for `Payment Address > Name = %ContactName%` |
+| 14 | Enter text | Use `Tab` and keyboard entry for address line 1 = `%Address%` |
+| 15 | Enter text | Use `Tab` and keyboard entry for address line 2 = `%City%` |
+| 16 | Enter text | Use `Tab` and keyboard entry for address line 3 = `%Country%` |
+| 17 | Enter text | Use `Tab` and keyboard entry for address line 4 = `%Postcode%` |
+| 18 | Enter text | Use `Tab` and keyboard entry for `Email = %SupplierEmail%` |
 | 19 | Run checkpoint | `NEW_VENDOR_FORM_COMPLETED`, screenshot `step-005-new-vendor-completed-before-save.png`, allowed `continue` |
 | 20 | Click button | Click `OK` |
 | 21 | Wait | Wait until Accounts screen is visible again |
@@ -278,11 +286,17 @@ First confirmed milestone:
 - PAD called the Python helper successfully by using `Run application`.
 - The helper returned valid mock JSON for `GN_CASH_MAIN_SCREEN`.
 
+Current confirmed build milestone:
+
+- PAD has completed the full V1 demo path through `CREATED_VENDOR_VISIBLE`.
+- The local build uses hidden Python helper runs so checkpoints do not visibly break the GnuCash menu state.
+- The local build uses a mixed interaction approach because GnuCash did not reliably expose all menu items and text fields as PAD UI elements.
+
 ## 9. Known Build Risks
 
 | Risk | Mitigation |
 |---|---|
-| PAD cannot reliably find a UI element | Use menu/keyboard shortcuts before coordinates |
+| PAD cannot reliably find a UI element | Use the proven local mix of image clicks, active-window-relative mouse movement, and keyboard entry |
 | Window focus changes before screenshot | Add waits and ensure GnuCash window is active |
 | JSON string escaping is awkward in PAD | Start with simple fictional values; avoid quote characters in test data |
 | PAD writes UTF-8 files with a BOM | Python helper now accepts `utf-8-sig` input |
@@ -290,6 +304,7 @@ First confirmed milestone:
 | Repeated mock tests create duplicate demo vendors | Use unique fictional supplier names or reset the demo file between runs |
 | GnuCash prompts on quit | Save through `File > Save` before `File > Quit`; document any prompt if it appears |
 | Wrong supplier values entered | Stop at `NEW_VENDOR_FORM_COMPLETED`; do not click `OK` unless Vision confirms |
+| GnuCash reopens on the last-used screen in the next run | Treat startup reset or forced clean launch as a V2 hardening task |
 
 ## 10. What To Capture During Manual Build
 
@@ -302,3 +317,9 @@ As you build the actual PAD flow, record:
 - Any GnuCash prompt that appears after `File > Save` or `File > Quit`.
 
 Those details should be added back to this document after the first successful PAD mock-mode run.
+
+Known details from the current working build:
+
+- Python helper runs use `Window style = Hidden`.
+- Some menu actions required mouse coordinates relative to `Active window`.
+- The `New Vendor` form field entry path is keyboard-driven because PAD could not reliably target individual text boxes inside the dialog.

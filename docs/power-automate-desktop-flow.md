@@ -1,6 +1,6 @@
 # Power Automate Desktop Flow
 
-This document describes the planned PAD flow. It is not built in this phase.
+This document describes the PAD flow that has now been manually proven in Power Automate Desktop against the local GnuCash demo file in mock mode.
 
 The current design is based on actual GnuCash screenshots captured from the local demo file. See [gnucash-screenshot-checkpoints.md](gnucash-screenshot-checkpoints.md).
 
@@ -16,7 +16,7 @@ PAD is the executor. It opens applications, navigates known screens, enters data
 
 OpenAI Vision does not control the desktop in V1.
 
-## Planned Flow
+## Confirmed V1 Flow
 
 ```text
 Get one SharePoint supplier request
@@ -51,6 +51,32 @@ Return to main screen
 Click File > Save
 Click File > Quit
 ```
+
+## Implementation Notes From The Working PAD Build
+
+- PAD calls the Python helper through `Run application`, not `Run DOS command`.
+- The Python helper actions use:
+  - `Window style = Hidden`
+  - `After application launch = Wait for application to complete`
+- GnuCash did not reliably expose all menu items or form fields as PAD UI elements.
+- The working menu navigation pattern in the demo flow is a hybrid of:
+  - `Focus window`
+  - image-based menu clicks where they worked
+  - `Move mouse` with positions relative to `Active window`
+  - `Send mouse click`
+- The `New Vendor` form field entry is keyboard-driven because PAD did not reliably expose the individual text boxes inside the dialog.
+- The first field entry starts with the cursor already in `Company Name`, then uses `Send keys` plus `Tab` to move through the rest of the fields.
+- The flow keeps a stop branch that shows `%FailureReason%` when `%LastVisionStatus% <> 'continue'`.
+
+## V2 Hardening Note
+
+The current V1 demo flow assumes a known startup state for GnuCash. In repeated runs, GnuCash may reopen on the last-used screen rather than the Accounts screen, which can break the opening checkpoints.
+
+This is a known V2 hardening item. The recommended V2 options are:
+
+1. always launch from a closed GnuCash session
+2. add a reset-to-main-screen routine before checkpoint 1
+3. add recovery branches for a few known reopened states
 
 ## Observed GnuCash Field Mapping
 
@@ -106,7 +132,7 @@ Python should return JSON that PAD can read:
 }
 ```
 
-For the current build, PAD should call Python through `Run application` rather than `Run DOS command`, because that launch path has already been proven working with the local venv and helper script.
+For the current build, PAD calls Python through `Run application` rather than `Run DOS command`, because that launch path has been proven working with the local venv and helper script.
 
 ## Navigation Preference Order
 
@@ -117,4 +143,6 @@ Use this order where possible:
 3. Image recognition
 4. Fixed coordinates
 
-Coordinates may be used in V1 if needed, but they must be documented because they can break when display scaling or resolution changes.
+The working demo flow ended up using a mix of image recognition and coordinates relative to `Active window` because GnuCash did not reliably expose every control to PAD.
+
+Coordinates may be used in V1 if needed, but they must be documented because they can break when display scaling, resolution, or window layout changes.
