@@ -37,6 +37,8 @@ Actual GnuCash screenshots have now been captured from the local demo file and a
 
 The Power Automate Desktop build scaffold is documented in [docs/pad-build-guide.md](docs/pad-build-guide.md), with a detailed checklist in [docs/pad-action-checklist.md](docs/pad-action-checklist.md) and checkpoint request samples in `sample-data/pad-checkpoints/`.
 
+The cloud-side build is scaffolded in [docs/power-automate-flow.md](docs/power-automate-flow.md), [docs/cloud-integration-build-guide.md](docs/cloud-integration-build-guide.md), [docs/sharepoint-lists.md](docs/sharepoint-lists.md), and [docs/microsoft-forms-design.md](docs/microsoft-forms-design.md).
+
 ## Architecture Summary
 
 ```text

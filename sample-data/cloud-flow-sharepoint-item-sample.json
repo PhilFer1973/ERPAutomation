@@ -1,0 +1,17 @@
+{
+  "Title": "Blue Kite Consulting Ltd",
+  "SupplierLegalName": "Blue Kite Consulting Ltd",
+  "ContactName": "Sarah Ahmed",
+  "SupplierEmail": "sarah.ahmed@example.com",
+  "Address": "10 Market Street",
+  "City": "London",
+  "Postcode": "EC1A 1AA",
+  "Country": "United Kingdom",
+  "Currency": "GBP",
+  "Status": "New",
+  "RunId": null,
+  "GnuCashVendorId": null,
+  "FailureReason": null,
+  "SubmittedAt": "2026-06-18T09:30:00Z",
+  "ProcessedAt": null
+}
